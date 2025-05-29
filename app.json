@@ -27,7 +27,8 @@
         "foregroundImage": "./assets/icons/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.anonymous.catbreeds"
     },
     "web": {
       "favicon": "./assets/favicon.png"
