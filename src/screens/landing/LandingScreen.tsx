@@ -111,6 +111,7 @@ const LandingScreen: FC = () => {
         value={searchText}
         onChange={setSearchText}
         onClear={handleOnClear}
+        placeholder="Search cat breeds"
       />
       {renderContent()}
     </View>

@@ -17,6 +17,7 @@ type SearchInputProps = {
   value?: string;
   props?: TextInputProps;
   autoFocus?: boolean;
+  placeholder?: string;
 };
 
 const SearchBar: FC<SearchInputProps> = ({
@@ -26,6 +27,7 @@ const SearchBar: FC<SearchInputProps> = ({
   value,
   props,
   autoFocus = false,
+  placeholder = "Search",
 }) => {
   const ref = useRef<TextInput>(null);
 
@@ -35,7 +37,7 @@ const SearchBar: FC<SearchInputProps> = ({
         <TextInput
           ref={ref}
           style={styles.input}
-          placeholder="Search"
+          placeholder={placeholder}
           value={value}
           onChangeText={onChange}
           onSubmitEditing={onSubmit}
