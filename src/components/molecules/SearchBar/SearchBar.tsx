@@ -1,11 +1,9 @@
 import { Color } from "@/src/styles/colors";
 import { Ionicons } from "@expo/vector-icons";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import {
-  NativeSyntheticEvent,
   StyleSheet,
   TextInput,
-  TextInputChangeEventData,
   TextInputProps,
   TouchableOpacity,
   View,
@@ -13,16 +11,15 @@ import {
 
 type SearchInputProps = {
   onPress?: () => void;
-  onChange?: (e: NativeSyntheticEvent<TextInputChangeEventData>) => void;
-  onSubmit?: (text: string) => void;
+  onChange?: (text: string) => void;
+  onSubmit?: () => void;
   onClear?: () => void;
   value?: string;
   props?: TextInputProps;
   autoFocus?: boolean;
 };
 
-export const SearchBar: FC<SearchInputProps> = ({
-  onPress,
+const SearchBar: FC<SearchInputProps> = ({
   onChange,
   onSubmit,
   onClear,
@@ -30,15 +27,18 @@ export const SearchBar: FC<SearchInputProps> = ({
   props,
   autoFocus = false,
 }) => {
+  const ref = useRef<TextInput>(null);
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
+          ref={ref}
           style={styles.input}
           placeholder="Search"
           value={value}
-          onChange={onChange}
-          onSubmitEditing={(e) => onSubmit?.(e.nativeEvent.text)}
+          onChangeText={onChange}
+          onSubmitEditing={onSubmit}
           autoFocus={autoFocus}
           returnKeyType="search"
           {...props}
@@ -48,7 +48,7 @@ export const SearchBar: FC<SearchInputProps> = ({
             <Ionicons name="close" size={24} color={Color.smoke} />
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity onPress={onPress}>
+          <TouchableOpacity onPress={() => ref.current?.focus()}>
             <Ionicons name="search" size={24} color={Color.smoke} />
           </TouchableOpacity>
         )}
@@ -83,3 +83,5 @@ const styles = StyleSheet.create({
     color: "#000",
   },
 });
+
+export default SearchBar;

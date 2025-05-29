@@ -2,11 +2,11 @@ import { Color } from "@/src/styles/colors";
 import { FC, useEffect, useRef } from "react";
 import { Animated, Easing, StyleSheet, View, ViewStyle } from "react-native";
 
-interface SkeletonProps {
+type SkeletonProps = {
   style?: ViewStyle;
-}
+};
 
-export const Skeleton: FC<SkeletonProps> = ({ style }) => {
+const Skeleton: FC<SkeletonProps> = ({ style }) => {
   const animatedValue = useRef(new Animated.Value(0.5)).current;
 
   useEffect(() => {
@@ -50,3 +50,5 @@ const styles = StyleSheet.create({
     backgroundColor: Color.frost,
   },
 });
+
+export default Skeleton;

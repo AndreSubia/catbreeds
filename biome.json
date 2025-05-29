@@ -111,6 +111,16 @@
       "quoteStyle": "double",
       "trailingCommas": "all",
       "lineWidth": 80
-    }
+    },
+    "globals": [
+      "jest",
+      "describe",
+      "test",
+      "expect",
+      "beforeEach",
+      "afterEach",
+      "beforeAll",
+      "afterAll"
+    ]
   }
 }

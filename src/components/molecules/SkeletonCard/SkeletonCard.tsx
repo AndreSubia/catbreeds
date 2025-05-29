@@ -1,9 +1,9 @@
 import { Color } from "@/src/styles/colors";
 import { FC } from "react";
 import { StyleSheet, View } from "react-native";
-import { Skeleton } from "../../atoms/Skeleton/Skeleton";
+import Skeleton from "../../atoms/Skeleton/Skeleton";
 
-export const SkeletonCard: FC = () => {
+const SkeletonCard: FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -53,3 +53,5 @@ const styles = StyleSheet.create({
     width: 100,
   },
 });
+
+export default SkeletonCard;

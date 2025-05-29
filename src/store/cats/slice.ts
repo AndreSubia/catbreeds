@@ -11,7 +11,7 @@ interface CatBreedsState {
 
 const initialState: CatBreedsState = {
   data: [],
-  loading: false,
+  loading: true,
   error: null,
   hasNextPage: true,
 };
@@ -19,45 +19,69 @@ const initialState: CatBreedsState = {
 type FetchCatBreedsParams = {
   page: number;
   limit: number;
+  searchName?: string;
 };
 
 export const fetchCatBreeds = createAsyncThunk<
-  { breeds: CatBreed[]; page: number },
+  { breeds: CatBreed[]; page: number; searchName?: string },
   FetchCatBreedsParams
->("catBreeds/fetchAll", async ({ page, limit }) => {
-  const res = await api.get<CatBreed[]>(`/breeds`, {
-    params: { limit, page },
-  });
-
-  const breeds = res.data;
-
-  const breedsWithImages = await Promise.all(
-    breeds.map(async (breed) => {
-      if (!breed.reference_image_id) return breed;
-
-      try {
-        const imgRes = await api.get(`/images/${breed.reference_image_id}`);
-        return {
-          ...breed,
-          image_url: imgRes.data.url,
-        };
-      } catch {
-        console.warn(`Could not fetch image for ${breed.name}`);
-        return {
-          ...breed,
-          image_url: undefined,
-        };
-      }
-    }),
-  );
-
-  return { breeds: breedsWithImages, page };
+>("catBreeds/fetchAll", async ({ page, limit, searchName }) => {
+  try {
+    let breeds: CatBreed[];
+    if (searchName) {
+      const res = await api.get<CatBreed[]>(`/breeds/search`, {
+        params: { q: searchName },
+      });
+      breeds = res.data;
+    } else {
+      const res = await api.get<CatBreed[]>(`/breeds`, {
+        params: { limit, page },
+      });
+      breeds = res.data;
+    }
+    const breedsWithImages = await Promise.all(
+      breeds.map(async (breed) => {
+        if (!breed.reference_image_id)
+          return {
+            ...breed,
+            image_url: undefined,
+          };
+        try {
+          const imgRes = await api.get(`/images/${breed.reference_image_id}`);
+          return {
+            ...breed,
+            image_url: imgRes.data.url,
+          };
+        } catch {
+          console.warn(`Could not fetch image for ${breed.name}`);
+          return {
+            ...breed,
+            image_url: undefined,
+          };
+        }
+      }),
+    );
+    return { breeds: breedsWithImages, page, searchName };
+  } catch (e: unknown) {
+    console.error(e);
+    if (e instanceof Error) {
+      throw new Error(`Failed to fetch cat breeds: ${e.message}`);
+    }
+    throw new Error("Failed to fetch cat breeds");
+  }
 });
 
 const catBreedsSlice = createSlice({
   name: "catBreeds",
   initialState,
-  reducers: {},
+  reducers: {
+    resetCatBreeds: (state) => {
+      state.data = [];
+      state.hasNextPage = true;
+      state.error = null;
+      state.loading = true;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCatBreeds.pending, (state) => {
@@ -66,8 +90,9 @@ const catBreedsSlice = createSlice({
       })
       .addCase(fetchCatBreeds.fulfilled, (state, action) => {
         state.loading = false;
-        if (action.payload.page === 0) {
+        if (action.payload.page === 0 || action.payload.searchName) {
           state.data = action.payload.breeds;
+          state.hasNextPage = action.payload.searchName ? false : true;
         } else if (action.payload.breeds.length === 0) {
           state.hasNextPage = false;
         } else {
@@ -82,3 +107,4 @@ const catBreedsSlice = createSlice({
 });
 
 export default catBreedsSlice.reducer;
+export const { resetCatBreeds } = catBreedsSlice.actions;

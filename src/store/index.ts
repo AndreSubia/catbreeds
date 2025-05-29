@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import selectedBreedReducer from "./cats/selectedCatBreed.slice";
 import catBreedsReducer from "./cats/slice";
 
 export const store = configureStore({
   reducer: {
     catBreeds: catBreedsReducer,
+    selectedCatBreed: selectedBreedReducer,
   },
 });
 

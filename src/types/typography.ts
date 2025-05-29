@@ -13,9 +13,11 @@ export const Typography = {
   },
   h4: {
     fontSize: 28,
+    fontWeight: "bold",
   },
   h5: {
     fontSize: 24,
+    fontWeight: "bold",
   },
   t1: {
     fontSize: 22,
@@ -27,6 +29,7 @@ export const Typography = {
   },
   subNav: {
     fontSize: 16,
+    fontWeight: "black",
   },
   subNavBold: {
     fontSize: 16,
@@ -39,9 +42,11 @@ export const Typography = {
   },
   body: {
     fontSize: 16,
+    fontWeight: "black",
   },
   caption: {
     fontSize: 14,
+    fontWeight: "black",
   },
   captionBold: {
     fontSize: 14,
@@ -49,9 +54,11 @@ export const Typography = {
   },
   captionSmall: {
     fontSize: 12,
+    fontWeight: "black",
   },
   disclosure: {
     fontSize: 12,
+    fontWeight: "black",
   },
 } as const;
 

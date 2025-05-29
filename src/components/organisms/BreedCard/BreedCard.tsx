@@ -1,21 +1,30 @@
+import { useAppDispatch } from "@/src/hooks/useAppDispatch";
+import { setSelectedBreed } from "@/src/store/cats/selectedCatBreed.slice";
 import { Color } from "@/src/styles/colors";
 import { CatBreed } from "@/src/types/cats";
 import Text from "@components/atoms/Text/Text";
 import { useRouter } from "expo-router";
-import { memo } from "react";
+import { FC, memo } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
-interface BreedCardProps {
+type BreedCardProps = {
   breed: CatBreed;
-}
+};
 
-function BreedCard({ breed }: BreedCardProps) {
+const BreedCard: FC<BreedCardProps> = ({ breed }) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const handleOnPress = () => {
+    dispatch(setSelectedBreed(breed));
+    router.push(`/detail/${breed.id}`);
+  };
+
   return (
     <View style={styles.card}>
       <View style={styles.cardHeader}>
         <Text type="subNavBold">{breed.name}</Text>
-        <TouchableOpacity onPress={() => router.push(`/details/${breed.id}`)}>
+        <TouchableOpacity onPress={handleOnPress}>
           <Text color="frequencyPurple" type="subNavBold">
             See more...
           </Text>
@@ -37,9 +46,7 @@ function BreedCard({ breed }: BreedCardProps) {
       </View>
     </View>
   );
-}
-
-export default memo(BreedCard);
+};
 
 const styles = StyleSheet.create({
   card: {
@@ -70,3 +77,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+export default memo(BreedCard);
