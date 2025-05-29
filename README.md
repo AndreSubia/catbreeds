@@ -8,11 +8,11 @@
 <h2 align="center">IOS</h2>
 <table align="center">
   <tr>
-    <td><img src="assets/demo/ios_1.png" width="200" alt="Screen IOS" /></td>
+    <td><img src="assets/demo/ios_1.jpg" width="200" alt="Screen IOS" /></td>
     <td width="16"></td>
-    <td><img src="assets/demo/ios_2.png" width="200" alt="Landing Screen IOS" /></td>
+    <td><img src="assets/demo/ios_2.jpg" width="200" alt="Landing Screen IOS" /></td>
     <td width="16"></td>
-    <td><img src="assets/demo/ios_3.png" width="200" alt="Detail Screen IOS" /></td>
+    <td><img src="assets/demo/ios_3.jpg" width="200" alt="Detail Screen IOS" /></td>
   </tr>
 </table>
 
@@ -20,11 +20,11 @@
 
 <table align="center">
   <tr>
-    <td><img src="assets/demo/android_1.png" width="200" alt="SplashScreen Android" /></td>
+    <td><img src="assets/demo/android_1.jpg" width="200" alt="SplashScreen Android" /></td>
     <td width="16"></td>
-    <td><img src="assets/demo/android_2.png" width="200" alt="Landing Screen Android" /></td>
+    <td><img src="assets/demo/android_2.jpg" width="200" alt="Landing Screen Android" /></td>
     <td width="16"></td>
-    <td><img src="assets/demo/android_3.png" width="200" alt="Detail Screen Android" /></td>
+    <td><img src="assets/demo/android_3.jpg" width="200" alt="Detail Screen Android" /></td>
   </tr>
 </table>
 
