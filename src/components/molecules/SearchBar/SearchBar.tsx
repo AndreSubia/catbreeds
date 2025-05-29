@@ -31,6 +31,12 @@ const SearchBar: FC<SearchInputProps> = ({
 }) => {
   const ref = useRef<TextInput>(null);
 
+  const handleOnPressIcon = () => {
+    if (!ref.current?.isFocused?.()) {
+      ref.current?.focus();
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -50,7 +56,7 @@ const SearchBar: FC<SearchInputProps> = ({
             <Ionicons name="close" size={24} color={Color.smoke} />
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity onPress={() => ref.current?.focus()}>
+          <TouchableOpacity onPress={handleOnPressIcon}>
             <Ionicons name="search" size={24} color={Color.smoke} />
           </TouchableOpacity>
         )}

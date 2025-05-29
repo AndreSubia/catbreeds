@@ -32,11 +32,11 @@ const BreedCard: FC<BreedCardProps> = ({ breed }) => {
       </View>
       <Image
         source={
-          breed?.image_url
+          breed?.image_url && breed.image_url.trim() !== ""
             ? { uri: breed.image_url }
             : require("../../../../assets/images/no_image.jpg")
         }
-        style={{ height: 350, width: "100%", backgroundColor: Color.frost }}
+        style={styles.image}
         resizeMode="contain"
         defaultSource={require("../../../../assets/images/no_image.jpg")}
       />
@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 2.5,
-
     elevation: 4,
   },
   cardHeader: {
@@ -71,10 +70,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  cardFooter: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+  image: {
+    height: 350,
+    width: "100%",
+    backgroundColor: Color.frost,
   },
 });
 
