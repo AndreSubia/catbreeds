@@ -49,6 +49,7 @@ const SearchBar: FC<SearchInputProps> = ({
           onSubmitEditing={onSubmit}
           autoFocus={autoFocus}
           returnKeyType="search"
+          placeholderTextColor={Color.smoke}
           {...props}
         />
         {value ? (
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     fontSize: 16,
-    color: "#000",
+    color: Color.black,
   },
 });
 
