@@ -38,7 +38,7 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
-          name="detail/[breedId]"
+          name="detail"
           options={{
             headerShown: false,
           }}

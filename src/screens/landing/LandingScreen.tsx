@@ -8,7 +8,7 @@ import { useDebounce } from "@/src/hooks/useDebounce";
 import { fetchCatBreeds, resetCatBreeds } from "@/src/store/cats/slice";
 import { Color } from "@/src/styles/colors";
 import { CatBreed } from "@/src/types/cats";
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { Alert, FlatList, ScrollView, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
